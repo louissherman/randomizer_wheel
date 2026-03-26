@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RANDOMIZER</title>
+  <link rel="stylesheet" href="styles.css?v=4" />
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <h1 class="main-title">THE WHEEL OF PROMPTS</h1>
+    </header>
+
+    <section class="content">
+      <aside id="setupPanel" class="panel controls">
+        <h2>Prompts</h2>
+        <p class="helper">Add prompts manually or import JSON/CSV, then submit to start.</p>
+
+        <label for="guestImageFile">Guest image (optional)</label>
+        <input id="guestImageFile" type="file" accept="image/*" />
+
+        <label for="bulkPrompts">Paste prompts (bulk)</label>
+        <textarea
+          id="bulkPrompts"
+          rows="6"
+          placeholder="One prompt per line: name | description | link&#10;Example: Hot Seat | Answer chat questions for 2 minutes | https://example.com"
+        ></textarea>
+        <div class="row">
+          <button id="importPastedBtn">Import Pasted</button>
+        </div>
+
+        <label for="promptName">Name</label>
+        <input id="promptName" type="text" placeholder="Example: Hot Seat" />
+
+        <label for="promptDescription">Description</label>
+        <textarea id="promptDescription" rows="3" placeholder="Prompt description..."></textarea>
+        <label for="promptLink">Link (optional)</label>
+        <input id="promptLink" type="url" placeholder="https://example.com" />
+
+        <div class="row">
+          <button id="addPromptBtn">Add Prompt</button>
+          <button id="clearPromptsBtn" class="ghost">Clear All</button>
+        </div>
+
+        <label for="promptFile">Upload prompts</label>
+        <input id="promptFile" type="file" accept=".json,.csv,text/csv,application/json" />
+        <p class="helper small">
+          JSON format: [{"name":"Prompt A","description":"...","link":"https://..."}]<br />
+          CSV format headers: name,description,link
+        </p>
+
+        <div class="row">
+          <button id="startWheelBtn" class="accent">Submit Prompts & Start</button>
+        </div>
+      </aside>
+
+      <section id="wheelSection" class="wheel-section panel hidden">
+        <div class="wheel-wrap">
+          <div class="pointer"></div>
+          <div id="wheel" class="wheel" aria-label="Randomizer wheel"></div>
+          <button id="spinBtn" class="accent spin-center-btn" type="button" data-has-guest="false">
+            <img id="guestImage" class="guest-image" src="" alt="Guest" hidden />
+            <span id="spinText">SPIN</span>
+          </button>
+        </div>
+        <section class="used-panel">
+          <div class="used-header">
+            <h3>Used Prompts</h3>
+            <button id="editPromptsBtn" class="ghost small-btn">Edit Prompts</button>
+          </div>
+          <ul id="usedPromptList" class="prompt-list"></ul>
+        </section>
+      </section>
+    </section>
+  </main>
+
+  <footer>Peter Overzet's Randomizer</footer>
+
+  <canvas id="fireworksCanvas"></canvas>
+
+  <dialog id="resultDialog">
+    <article>
+      <h3 id="resultName"></h3>
+      <p id="resultDescription"></p>
+      <p id="resultLinkWrap" class="result-link-wrap">
+        <a id="resultLink" href="#" target="_blank" rel="noopener noreferrer">Link</a>
+      </p>
+      <div class="outcome-radios" role="radiogroup" aria-label="Outcome">
+        <label class="radio-option" for="outcomeSuccess">
+          <input id="outcomeSuccess" type="radio" name="resultOutcome" value="success" />
+          Success
+        </label>
+        <label class="radio-option" for="outcomeFail">
+          <input id="outcomeFail" type="radio" name="resultOutcome" value="fail" />
+          Fail
+        </label>
+      </div>
+      <label for="selectedByInput">Selected</label>
+      <input id="selectedByInput" type="text" placeholder="Player name" />
+      <button id="closeResultBtn">Close</button>
+    </article>
+  </dialog>
+
+  <script src="app.js?v=4"></script>
+</body>
+</html>
