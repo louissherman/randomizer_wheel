@@ -1,6 +1,6 @@
 # Randomizer Wheel
 
-A lightweight, self-contained “Wheel of Prompts” web app inspired by [wheelofnames.com](https://wheelofnames.com).
+A lightweight, self-contained “Wheel of Prompts” web app, initially to be used for The Randomizer by Peter Overzet.
 
 ## What it does
 - Lets you create a wheel from prompts (`name`, `description`, optional `link`).
